@@ -11,7 +11,7 @@ class SmartFfmpegBridge {
 
     companion object {
         init {
-            System.loadLibrary("ffmpeg_bridge")
+            System.loadLibrary("smart_ffmpeg")
         }
 
         /**
