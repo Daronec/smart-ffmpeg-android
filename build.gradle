@@ -74,7 +74,7 @@ publishing {
         release(MavenPublication) {
             groupId = 'com.smartmedia'
             artifactId = 'smart-ffmpeg-android'
-            version = '1.0.2'
+            version = '1.0.3'
 
             afterEvaluate {
                 from components.release
