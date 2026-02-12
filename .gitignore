@@ -17,7 +17,8 @@ build/
 
 # Local configuration file
 local.properties
-gradle.properties
+# Note: gradle.properties with AndroidX settings is tracked in git
+# Tokens should be in ~/.gradle/gradle.properties (not in project)
 
 # Log Files
 *.log
