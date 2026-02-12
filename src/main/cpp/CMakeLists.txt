@@ -21,6 +21,7 @@ file(GLOB FFMPEG_PLAYER_SOURCES
 # Библиотека: FFmpeg Player (для воспроизведения видео)
 add_library(smart_ffmpeg SHARED
     ${FFMPEG_PLAYER_SOURCES}
+    ffmpeg_bridge_jni.c
 )
 
 target_link_libraries(smart_ffmpeg
