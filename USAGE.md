@@ -43,7 +43,7 @@ Add to your app's `build.gradle` or `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("com.smartmedia:smart-ffmpeg-android:1.0.3")
+    implementation("com.smartmedia:smart-ffmpeg-android:1.0.4")
 }
 ```
 
