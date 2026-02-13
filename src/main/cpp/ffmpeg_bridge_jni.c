@@ -288,7 +288,7 @@ Java_com_smartmedia_ffmpeg_SmartFfmpegBridge_getVideoMetadata(
     // Find video and audio streams
     int subtitleCount = 0;
     for (int i = 0; i < formatCtx->nb_streams; i++) {
-        AVMediaType type = formatCtx->streams[i]->codecpar->codec_type;
+        enum AVMediaType type = formatCtx->streams[i]->codecpar->codec_type;
         if (type == AVMEDIA_TYPE_VIDEO && videoStream == -1) {
             videoStream = i;
         } else if (type == AVMEDIA_TYPE_AUDIO && audioStream == -1) {
@@ -500,7 +500,7 @@ Java_com_smartmedia_ffmpeg_SmartFfmpegBridge_getVideoMetadataJson(
 
     // Find streams
     for (int i = 0; i < formatCtx->nb_streams; i++) {
-        AVMediaType type = formatCtx->streams[i]->codecpar->codec_type;
+        enum AVMediaType type = formatCtx->streams[i]->codecpar->codec_type;
         if (type == AVMEDIA_TYPE_VIDEO && videoStream == -1) {
             videoStream = i;
         } else if (type == AVMEDIA_TYPE_AUDIO && audioStream == -1) {
