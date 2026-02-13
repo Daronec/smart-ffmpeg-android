@@ -1,10 +1,13 @@
-# Smart FFmpeg Android
+# Smart FFmpeg Bridge
 
 [![License: LGPL v2.1](https://img.shields.io/badge/License-LGPL%20v2.1-blue.svg)](https://www.gnu.org/licenses/lgpl-2.1)
 [![GitHub release](https://img.shields.io/github/v/release/Daronec/smart-ffmpeg-android)](https://github.com/Daronec/smart-ffmpeg-android/releases)
 [![Build](https://github.com/Daronec/smart-ffmpeg-android/workflows/Build/badge.svg)](https://github.com/Daronec/smart-ffmpeg-android/actions)
+[![Platform](https://img.shields.io/badge/platform-Android%20%7C%20iOS-lightgrey.svg)](https://github.com/Daronec/smart-ffmpeg-android)
 
-Мощная Android библиотека для воспроизведения видео и работы с медиафайлами на основе FFmpeg.
+Мощная кроссплатформенная библиотека для воспроизведения видео и работы с медиафайлами на основе FFmpeg.
+
+**Поддерживаемые платформы:** Android | iOS
 
 [English](#english) | [Русский](#russian)
 
@@ -22,10 +25,13 @@
 - 🎯 **Точный seek** - перемотка с точностью до кадра
 - ⏩ **Скорость воспроизведения** - от 0.5x до 3.0x
 - 📦 **Множество форматов** - MP4, AVI, FLV, MKV, WebM и другие
+- 🔄 **Кроссплатформенность** - Android и iOS с единым API
 
 ### 🚀 Быстрый старт
 
-#### Установка
+> 📱 **Выберите платформу:** [Android](#android-installation) | [iOS](#ios-installation) | [Flutter](#flutter-integration)
+
+#### <a name="android-installation"></a>Android Installation
 
 1. Добавьте репозиторий в `settings.gradle`:
 
@@ -185,6 +191,65 @@ metadata?.let {
 val version = SmartFfmpegBridge.getFFmpegVersion()
 Log.d("FFmpeg", "Версия: $version")
 ```
+
+### 📚 API Reference
+
+#### <a name="ios-installation"></a>iOS Installation
+
+**CocoaPods:**
+
+```ruby
+# Podfile
+pod 'SmartFfmpegBridge', :git => 'https://github.com/Daronec/smart-ffmpeg-android.git', :tag => 'v1.0.4'
+```
+
+```bash
+pod install
+```
+
+**Swift Usage:**
+
+```swift
+import SmartFfmpegBridge
+
+// Extract thumbnail
+let thumbnail = SmartFfmpegBridgeSwift.extractThumbnailImage(
+    fromVideo: "/path/to/video.mp4",
+    atTime: 5000,  // 5 seconds
+    width: 640,
+    height: 360
+)
+
+if let image = thumbnail {
+    imageView.image = image
+}
+
+// Get video metadata
+if let metadata = SmartFfmpegBridgeSwift.getVideoMetadata("/path/to/video.mp4") {
+    print("Resolution: \(metadata["width"] ?? 0)x\(metadata["height"] ?? 0)")
+    print("Duration: \(metadata["duration"] ?? 0) ms")
+}
+```
+
+📖 **Подробнее:** [iOS Documentation](ios/README.md) | [Quick Start](ios/QUICK_START.md)
+
+#### <a name="flutter-integration"></a>Flutter Integration
+
+Библиотека легко интегрируется с Flutter через platform channels:
+
+```dart
+// Dart API (одинаковый для Android и iOS)
+final thumbnail = await YourPlugin.extractThumbnail(
+  videoPath: videoPath,
+  timeMs: 5000,
+  width: 640,
+  height: 360,
+);
+```
+
+📖 **Подробнее:** [Flutter Integration - Android](FLUTTER_INTEGRATION.md) | [Flutter Integration - iOS](ios/FLUTTER_INTEGRATION.md)
+
+---
 
 ### 📚 API Reference
 
@@ -409,7 +474,12 @@ if (thumbnailData != null) {
 
 ### 📚 Documentation
 
-- 📖 [Integration Guide](INTEGRATION_GUIDE.md)
+- 📖 [Android Integration Guide](INTEGRATION_GUIDE.md)
+- 📱 [iOS Documentation](ios/README.md)
+- 🚀 [iOS Quick Start](ios/QUICK_START.md)
+- 🔄 [Platform Comparison](PLATFORM_COMPARISON.md)
+- 🦋 [Flutter Integration - Android](FLUTTER_INTEGRATION.md)
+- 🦋 [Flutter Integration - iOS](ios/FLUTTER_INTEGRATION.md)
 - 🏗️ [Project Structure](STRUCTURE.md)
 - 📦 [Publishing Guide](PUBLISH.md)
 - 🔒 [Security Policy](SECURITY.md)
@@ -417,9 +487,17 @@ if (thumbnailData != null) {
 
 ### 📋 Requirements
 
-- **Android API**: 21+ (Android 5.0 Lollipop)
+**Android:**
+
+- **Android API**: 26+ (Android 8.0 Oreo)
 - **Architectures**: arm64-v8a
-- **Size**: ~7 MB (AAR)
+- **Size**: ~50 MB (AAR with FFmpeg)
+
+**iOS:**
+
+- **iOS Version**: 12.0+
+- **Architectures**: arm64, x86_64 (simulator)
+- **Size**: ~50 MB (with FFmpeg)
 
 ### 🔧 Building from Source
 
