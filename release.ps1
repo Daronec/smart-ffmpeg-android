@@ -65,9 +65,20 @@ if ((Get-Content "build.gradle" -Raw) -match "version = '$Version'") {
     exit 1
 }
 
-# Skip tests on Windows (will run in GitHub Actions)
-Write-Warning "Skipping tests on Windows (will run in GitHub Actions)"
-Write-Info "Tests will be executed automatically in CI/CD pipeline"
+# Run tests
+Write-Info "Running tests..."
+try {
+    .\gradlew.bat test --quiet
+    Write-Success "All tests passed"
+} catch {
+    Write-Error "Tests failed!"
+    Write-Host $_.Exception.Message
+    Write-Host ""
+    Write-Host "Fix the tests before releasing"
+    Write-Host "To see detailed test results, run:"
+    Write-Host "  .\gradlew.bat test"
+    exit 1
+}
 
 # Build library
 Write-Info "Building library..."
