@@ -40,13 +40,34 @@ object SmartFfmpegBridge {
     external fun getVideoDuration(videoPath: String): Long
 
     /**
-     * Get video metadata.
+     * Get video metadata as HashMap.
+     * 
+     * Returns extended metadata including:
+     * - width, height, duration, codec, bitrate (basic)
+     * - fps, rotation, container (video)
+     * - audioCodec, sampleRate, channels (audio)
+     * - streamCount, hasAudio, hasSubtitles (streams)
      *
      * @param videoPath Absolute path to video file
      * @return Map containing metadata (width, height, duration, codec, etc.)
      */
     @JvmStatic
     external fun getVideoMetadata(videoPath: String): Map<String, Any>?
+
+    /**
+     * Get video metadata as JSON string (with safe-mode error handling).
+     * 
+     * Returns JSON in format:
+     * Success: {"success":true,"data":{...metadata...}}
+     * Error: {"success":false,"error":"error message"}
+     * 
+     * This method never crashes - always returns valid JSON.
+     *
+     * @param videoPath Absolute path to video file
+     * @return JSON string with metadata or error
+     */
+    @JvmStatic
+    external fun getVideoMetadataJson(videoPath: String): String
 
     /**
      * Get FFmpeg version string.

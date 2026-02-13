@@ -71,17 +71,64 @@ dependencies {
 
 // JitPack configuration
 group = 'com.github.Daronec'
-version = '1.0.4'
+version = '1.0.5'
+
+// Task to generate sources JAR
+task androidSourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from android.sourceSets.main.java.srcDirs
+}
 
 publishing {
     publications {
         release(MavenPublication) {
             groupId = 'com.github.Daronec'
             artifactId = 'smart-ffmpeg-android'
-            version = '1.0.4'
+            version = '1.0.5'
 
             afterEvaluate {
                 from components.release
+            }
+
+            // Add sources JAR
+            artifact androidSourcesJar
+
+            pom {
+                name = 'Smart FFmpeg Android'
+                description = 'Powerful Android library for video playback and media processing based on FFmpeg'
+                url = 'https://github.com/Daronec/smart-ffmpeg-android'
+                
+                licenses {
+                    license {
+                        name = 'GNU Lesser General Public License v2.1'
+                        url = 'https://www.gnu.org/licenses/lgpl-2.1.html'
+                    }
+                }
+                
+                developers {
+                    developer {
+                        id = 'daronec'
+                        name = 'Daronec'
+                        url = 'https://github.com/Daronec'
+                    }
+                }
+                
+                scm {
+                    connection = 'scm:git:git://github.com/Daronec/smart-ffmpeg-android.git'
+                    developerConnection = 'scm:git:ssh://github.com/Daronec/smart-ffmpeg-android.git'
+                    url = 'https://github.com/Daronec/smart-ffmpeg-android'
+                }
+            }
+        }
+    }
+    
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/Daronec/smart-ffmpeg-android")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("GPR_USER")
+                password = project.findProperty("gpr.key") ?: System.getenv("GPR_KEY")
             }
         }
     }

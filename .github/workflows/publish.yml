@@ -1,8 +1,9 @@
-name: Publish to GitHub Packages
+name: Publish to GitHub Packages (Legacy)
+
+# This workflow is deprecated - use release.yml instead
+# Kept for backward compatibility
 
 on:
-  release:
-    types: [created]
   workflow_dispatch:
 
 jobs:
