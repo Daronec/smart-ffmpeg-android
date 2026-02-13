@@ -3769,7 +3769,7 @@ void video_render_gl_render_loop(VideoRenderGL *vr,
             // Успешно отрендерено
             // 🔴 ЭТАЛОН: Логируем master clock тип и timing для диагностики
             int queue_size = frame_queue_size((FrameQueue *)frame_queue);
-            bool has_audio = (audio_state && clock_is_active(&((AudioState *)audio_state)->clock));
+            bool has_audio = (audio_state && ((AudioState *)audio_state)->clock.valid);
             const char *master_type = has_audio ? "audio" : "video";
             // diff уже вычислен выше в блоке AVSYNC, используем его для логирования
             bool has_anomaly = (fabs(diff) > 0.05) || (queue_size == 0) || (queue_size > 20);
