@@ -2,50 +2,43 @@
 
 ## Installation
 
-### Step 1: Add GitHub Packages repository
+### Step 1: Add JitPack repository
 
-Add to your project's `settings.gradle` or `settings.gradle.kts`:
+Add to your project's root `build.gradle`:
 
-```kotlin
-dependencyResolutionManagement {
+```groovy
+allprojects {
     repositories {
         google()
         mavenCentral()
-        maven {
-            url = uri("https://maven.pkg.github.com/Daronec/smart-ffmpeg-android")
-            credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("GPR_USER")
-                password = project.findProperty("gpr.key") as String? ?: System.getenv("GPR_KEY")
-            }
-        }
+        maven { url 'https://jitpack.io' }
     }
 }
 ```
 
-### Step 2: Add credentials
+Or in `settings.gradle` (for newer projects):
 
-Create or edit `~/.gradle/gradle.properties`:
-
-```properties
-gpr.user=YOUR_GITHUB_USERNAME
-gpr.key=YOUR_GITHUB_PERSONAL_ACCESS_TOKEN
-```
-
-To create a Personal Access Token:
-
-1. Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
-2. Generate new token with `read:packages` scope
-3. Copy the token to `gpr.key`
-
-### Step 3: Add dependency
-
-Add to your app's `build.gradle` or `build.gradle.kts`:
-
-```kotlin
-dependencies {
-    implementation("com.smartmedia:smart-ffmpeg-android:1.0.4")
+```groovy
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
 }
 ```
+
+### Step 2: Add dependency
+
+Add to your app's `build.gradle`:
+
+```groovy
+dependencies {
+    implementation 'com.github.Daronec:smart-ffmpeg-android:1.0.4'
+}
+```
+
+**That's it!** No GitHub credentials required.
 
 ## Usage
 
