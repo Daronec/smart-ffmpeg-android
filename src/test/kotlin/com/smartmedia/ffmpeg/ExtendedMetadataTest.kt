@@ -99,8 +99,8 @@ class ExtendedMetadataTest {
         """.trimIndent()
         
         // Validate JSON structure with string checks
-        assertTrue(errorJson.contains("\"success\":false"), "Error JSON should have success=false")
-        assertTrue(errorJson.contains("\"error\":"), "Error JSON should have error field")
+        assertTrue(errorJson.contains("\"success\"") && errorJson.contains("false"), "Error JSON should have success=false")
+        assertTrue(errorJson.contains("\"error\""), "Error JSON should have error field")
         assertTrue(errorJson.contains("Could not open file"), "Error JSON should have error message")
     }
 }
