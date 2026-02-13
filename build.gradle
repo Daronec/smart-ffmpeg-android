@@ -133,3 +133,8 @@ publishing {
         }
     }
 }
+
+// Fix task dependency issue
+tasks.withType(GenerateModuleMetadata) {
+    dependsOn(androidSourcesJar)
+}

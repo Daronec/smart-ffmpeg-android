@@ -2925,7 +2925,7 @@ void video_render_gl_render_loop(VideoRenderGL *vr,
         
         // Шаг 34.4: Audio starvation guard (video-only safe)
         // 🔴 ШАГ 5: Audio ещё не стартовал → не рендерим, но и не swap'аем
-        if (audio_state && !clock_is_active(&((AudioState *)audio_state)->clock)) {
+        if (audio_state && !((AudioState *)audio_state)->clock.valid) {
             usleep(2000); // 2ms
             continue;
         }
@@ -3279,9 +3279,9 @@ void video_render_gl_render_loop(VideoRenderGL *vr,
         bool has_audio_active = false;
         if (vs && vs->player_ctx) {
             PlayerContext *ctx = (PlayerContext *)vs->player_ctx;
-            has_audio_active = (ctx->has_audio == 1) && (audio_state && clock_is_active(&((AudioState *)audio_state)->clock));
+            has_audio_active = (ctx->has_audio == 1) && (audio_state && ((AudioState *)audio_state)->clock.valid);
         } else {
-            has_audio_active = (audio_state && clock_is_active(&((AudioState *)audio_state)->clock));
+            has_audio_active = (audio_state && ((AudioState *)audio_state)->clock.valid);
         }
         
         // 🔥 КРИТИЧЕСКИЙ FIX: Объявляем diff в широкой области видимости для логирования
