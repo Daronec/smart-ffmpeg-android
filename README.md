@@ -3,8 +3,9 @@
 [![License: LGPL v2.1](https://img.shields.io/badge/License-LGPL%20v2.1-blue.svg)](https://www.gnu.org/licenses/lgpl-2.1)
 [![GitHub release](https://img.shields.io/github/v/release/Daronec/smart-ffmpeg-android)](https://github.com/Daronec/smart-ffmpeg-android/releases)
 [![JitPack](https://jitpack.io/v/Daronec/smart-ffmpeg-android.svg)](https://jitpack.io/#Daronec/smart-ffmpeg-android)
+[![GitHub Packages](https://img.shields.io/badge/GitHub%20Packages-1.0.5-blue)](https://github.com/Daronec/smart-ffmpeg-android/packages)
 [![Build](https://github.com/Daronec/smart-ffmpeg-android/workflows/Build/badge.svg)](https://github.com/Daronec/smart-ffmpeg-android/actions)
-[![Platform](https://img.shields.io/badge/platform-Android%20%7C%20iOS-lightgrey.svg)](https://github.com/Daronec/smart-ffmpeg-android)
+[![Platform](https://img.shields.io/badge/platform-Android-green.svg)](https://github.com/Daronec/smart-ffmpeg-android)
 
 Мощная Android библиотека для воспроизведения видео и работы с медиафайлами на основе FFmpeg.
 
@@ -29,6 +30,10 @@
 
 #### Установка
 
+**Вариант 1: JitPack (рекомендуется)**
+
+[![JitPack](https://jitpack.io/v/Daronec/smart-ffmpeg-android.svg)](https://jitpack.io/#Daronec/smart-ffmpeg-android)
+
 1. Добавьте репозиторий JitPack в `settings.gradle`:
 
 ```groovy
@@ -45,11 +50,62 @@ dependencyResolutionManagement {
 
 ```groovy
 dependencies {
-    implementation 'com.github.Daronec:smart-ffmpeg-android:1.0.4'
+    implementation 'com.github.Daronec:smart-ffmpeg-android:1.0.5'
 }
 ```
 
 **Готово!** Никаких GitHub credentials не требуется.
+
+🔗 **Ссылки:**
+
+- 📦 [JitPack Repository](https://jitpack.io/#Daronec/smart-ffmpeg-android)
+- 📋 [Все версии на JitPack](https://jitpack.io/#Daronec/smart-ffmpeg-android)
+
+---
+
+**Вариант 2: GitHub Packages**
+
+[![GitHub Packages](https://img.shields.io/badge/GitHub%20Packages-1.0.5-blue)](https://github.com/Daronec/smart-ffmpeg-android/packages)
+
+1. Добавьте репозиторий в `settings.gradle`:
+
+```groovy
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url = uri("https://maven.pkg.github.com/Daronec/smart-ffmpeg-android")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("GPR_USER")
+                password = project.findProperty("gpr.key") ?: System.getenv("GPR_KEY")
+            }
+        }
+    }
+}
+```
+
+2. Настройте credentials в `~/.gradle/gradle.properties`:
+
+```properties
+gpr.user=YOUR_GITHUB_USERNAME
+gpr.key=YOUR_GITHUB_TOKEN
+```
+
+> 💡 [Как создать GitHub Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) (требуется: `read:packages`)
+
+3. Добавьте зависимость в `app/build.gradle`:
+
+```groovy
+dependencies {
+    implementation 'com.github.Daronec:smart-ffmpeg-android:1.0.5'
+}
+```
+
+🔗 **Ссылки:**
+
+- 📦 [GitHub Packages](https://github.com/Daronec/smart-ffmpeg-android/packages)
+- 📋 [Все релизы](https://github.com/Daronec/smart-ffmpeg-android/releases)
 
 #### Воспроизведение видео
 
@@ -310,6 +366,47 @@ LGPL 2.1 - см. [LICENSE](LICENSE)
 
 #### Installation
 
+**Option 1: JitPack (Recommended)**
+
+[![JitPack](https://jitpack.io/v/Daronec/smart-ffmpeg-android.svg)](https://jitpack.io/#Daronec/smart-ffmpeg-android)
+
+1. Add JitPack repository to `settings.gradle`:
+
+```groovy
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+2. Add dependency to `app/build.gradle`:
+
+```groovy
+dependencies {
+    implementation 'com.github.Daronec:smart-ffmpeg-android:1.0.5'
+}
+```
+
+**Done!** No GitHub credentials required.
+
+🔗 **Links:**
+
+- 📦 [JitPack Repository](https://jitpack.io/#Daronec/smart-ffmpeg-android)
+- 📋 [All versions on JitPack](https://jitpack.io/#Daronec/smart-ffmpeg-android)
+
+---
+
+**Option 2: GitHub Packages**
+
+[![GitHub Packages](https://img.shields.io/badge/GitHub%20Packages-1.0.5-blue)](https://github.com/Daronec/smart-ffmpeg-android/packages)
+
+**Option 2: GitHub Packages**
+
+[![GitHub Packages](https://img.shields.io/badge/GitHub%20Packages-1.0.5-blue)](https://github.com/Daronec/smart-ffmpeg-android/packages)
+
 1. Add repository to `settings.gradle`:
 
 ```groovy
@@ -341,9 +438,14 @@ gpr.key=YOUR_GITHUB_TOKEN
 
 ```groovy
 dependencies {
-    implementation 'com.smartmedia:smart-ffmpeg-android:1.0.0'
+    implementation 'com.github.Daronec:smart-ffmpeg-android:1.0.5'
 }
 ```
+
+🔗 **Links:**
+
+- 📦 [GitHub Packages](https://github.com/Daronec/smart-ffmpeg-android/packages)
+- 📋 [All releases](https://github.com/Daronec/smart-ffmpeg-android/releases)
 
 #### Video Playback
 
