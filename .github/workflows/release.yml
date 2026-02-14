@@ -60,9 +60,6 @@ jobs:
       - name: Build library
         run: ./gradlew assembleRelease
 
-      - name: Generate sources JAR
-        run: ./gradlew androidSourcesJar
-
       - name: Publish to GitHub Packages
         run: ./gradlew publish
         env:
