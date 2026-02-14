@@ -54,6 +54,12 @@ android {
     kotlinOptions {
         jvmTarget = '11'
     }
+
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+        }
+    }
 }
 
 dependencies {
@@ -73,12 +79,6 @@ dependencies {
 group = 'com.github.Daronec'
 version = '1.0.5'
 
-// Task to generate sources JAR
-task androidSourcesJar(type: Jar) {
-    archiveClassifier.set('sources')
-    from android.sourceSets.main.java.srcDirs
-}
-
 publishing {
     publications {
         release(MavenPublication) {
@@ -89,9 +89,6 @@ publishing {
             afterEvaluate {
                 from components.release
             }
-
-            // Add sources JAR
-            artifact androidSourcesJar
 
             pom {
                 name = 'Smart FFmpeg Android'
@@ -132,9 +129,4 @@ publishing {
             }
         }
     }
-}
-
-// Fix task dependency issue
-tasks.withType(GenerateModuleMetadata) {
-    dependsOn(androidSourcesJar)
 }
