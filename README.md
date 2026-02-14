@@ -54,8 +54,6 @@ dependencies {
 }
 ```
 
-**Готово!** Никаких GitHub credentials не требуется.
-
 🔗 **Ссылки:**
 
 - 📦 [JitPack Repository](https://jitpack.io/#Daronec/smart-ffmpeg-android)

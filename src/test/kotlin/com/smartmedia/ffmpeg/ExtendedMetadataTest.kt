@@ -46,11 +46,13 @@ class ExtendedMetadataTest {
     @Test
     fun `json metadata has success field`() {
         // Test JSON structure without JSONObject (not available in JVM tests)
-        val successJson = """{"success":true,"data":{"width":1920}}"""
-        val errorJson = """{"success":false,"error":"Invalid file"}"""
+        val successJson = """{"version":1,"success":true,"data":{"width":1920}}"""
+        val errorJson = """{"version":1,"success":false,"error":"Invalid file"}"""
         
         // Simple string validation
+        assertTrue(successJson.contains("\"version\":1"), "JSON should have version=1")
         assertTrue(successJson.contains("\"success\":true"), "Success JSON should have success=true")
+        assertTrue(errorJson.contains("\"version\":1"), "Error JSON should have version=1")
         assertTrue(errorJson.contains("\"success\":false"), "Error JSON should have success=false")
         assertTrue(errorJson.contains("\"error\""), "Error JSON should have error field")
     }
@@ -59,6 +61,7 @@ class ExtendedMetadataTest {
     fun `json metadata structure is valid`() {
         val sampleJson = """
         {
+            "version": 1,
             "success": true,
             "data": {
                 "width": 1920,
@@ -80,6 +83,7 @@ class ExtendedMetadataTest {
         """.trimIndent()
         
         // Validate JSON structure with string checks (JSONObject not available in JVM tests)
+        assertTrue(sampleJson.contains("\"version\":"), "JSON should have version field")
         assertTrue(sampleJson.contains("\"success\":"), "JSON should have success field")
         assertTrue(sampleJson.contains("\"data\":"), "JSON should have data field")
         assertTrue(sampleJson.contains("\"width\":"), "JSON should have width field")
@@ -93,12 +97,14 @@ class ExtendedMetadataTest {
     fun `error json structure is valid`() {
         val errorJson = """
         {
+            "version": 1,
             "success": false,
             "error": "Could not open file: No such file or directory"
         }
         """.trimIndent()
         
         // Validate JSON structure with string checks
+        assertTrue(errorJson.contains("\"version\"") && errorJson.contains("1"), "Error JSON should have version=1")
         assertTrue(errorJson.contains("\"success\"") && errorJson.contains("false"), "Error JSON should have success=false")
         assertTrue(errorJson.contains("\"error\""), "Error JSON should have error field")
         assertTrue(errorJson.contains("Could not open file"), "Error JSON should have error message")

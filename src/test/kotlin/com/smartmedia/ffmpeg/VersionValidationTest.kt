@@ -13,7 +13,7 @@ class VersionValidationTest {
 
     @Test
     fun `version is set to 1_0_2`() {
-        val expectedVersion = "1.0.5"
+        val expectedVersion = "1.0.6"
         
         val buildGradleFile = File("build.gradle")
         assertTrue(buildGradleFile.exists(), "build.gradle should exist")
@@ -24,7 +24,7 @@ class VersionValidationTest {
         assertEquals(
             expectedVersion,
             version,
-            "Version should be 1.0.5"
+            "Version should be 1.0.6"
         )
     }
     

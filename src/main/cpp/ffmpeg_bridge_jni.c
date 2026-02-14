@@ -462,7 +462,7 @@ Java_com_smartmedia_ffmpeg_SmartFfmpegBridge_getVideoMetadataJson(
     const char *path = (*env)->GetStringUTFChars(env, videoPath, NULL);
     if (path == NULL) {
         LOGE("Failed to get video path string");
-        return (*env)->NewStringUTF(env, "{\"success\":false,\"error\":\"Invalid path\"}");
+        return (*env)->NewStringUTF(env, "{\"version\":1,\"success\":false,\"error\":\"Invalid path\"}");
     }
 
     LOGI("Getting JSON metadata for: %s", path);
@@ -480,7 +480,7 @@ Java_com_smartmedia_ffmpeg_SmartFfmpegBridge_getVideoMetadataJson(
         av_strerror(ret, errBuf, sizeof(errBuf));
         LOGE("Could not open video file: %s, error: %s", path, errBuf);
         snprintf(jsonBuffer, sizeof(jsonBuffer),
-            "{\"success\":false,\"error\":\"Could not open file: %s\"}", errBuf);
+            "{\"version\":1,\"success\":false,\"error\":\"Could not open file: %s\"}", errBuf);
         (*env)->ReleaseStringUTFChars(env, videoPath, path);
         return (*env)->NewStringUTF(env, jsonBuffer);
     }
@@ -492,7 +492,7 @@ Java_com_smartmedia_ffmpeg_SmartFfmpegBridge_getVideoMetadataJson(
         av_strerror(ret, errBuf, sizeof(errBuf));
         LOGE("Could not find stream information: %s", errBuf);
         snprintf(jsonBuffer, sizeof(jsonBuffer),
-            "{\"success\":false,\"error\":\"Could not find stream info: %s\"}", errBuf);
+            "{\"version\":1,\"success\":false,\"error\":\"Could not find stream info: %s\"}", errBuf);
         avformat_close_input(&formatCtx);
         (*env)->ReleaseStringUTFChars(env, videoPath, path);
         return (*env)->NewStringUTF(env, jsonBuffer);
@@ -513,7 +513,7 @@ Java_com_smartmedia_ffmpeg_SmartFfmpegBridge_getVideoMetadataJson(
     if (videoStream == -1) {
         LOGE("Could not find video stream");
         snprintf(jsonBuffer, sizeof(jsonBuffer),
-            "{\"success\":false,\"error\":\"No video stream found\"}");
+            "{\"version\":1,\"success\":false,\"error\":\"No video stream found\"}");
         avformat_close_input(&formatCtx);
         (*env)->ReleaseStringUTFChars(env, videoPath, path);
         return (*env)->NewStringUTF(env, jsonBuffer);
@@ -524,8 +524,8 @@ Java_com_smartmedia_ffmpeg_SmartFfmpegBridge_getVideoMetadataJson(
     int remaining = sizeof(jsonBuffer);
     int written;
 
-    // Start JSON
-    written = snprintf(ptr, remaining, "{\"success\":true,\"data\":{");
+    // Start JSON with version field
+    written = snprintf(ptr, remaining, "{\"version\":1,\"success\":true,\"data\":{");
     ptr += written; remaining -= written;
 
     // Get video stream info
