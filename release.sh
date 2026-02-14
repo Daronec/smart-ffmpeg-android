@@ -101,12 +101,15 @@ else
     exit 1
 fi
 
-# Build library
-print_info "Building library..."
+# Build library (includes native C/C++ compilation)
+print_info "Building library (including native code)..."
 if ./gradlew assembleRelease --quiet; then
     print_success "Library built successfully"
 else
     print_error "Build failed!"
+    echo "Fix the build errors before releasing"
+    echo "To see detailed build output, run:"
+    echo "  ./gradlew assembleRelease"
     exit 1
 fi
 

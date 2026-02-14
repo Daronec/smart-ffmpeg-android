@@ -80,14 +80,18 @@ try {
     exit 1
 }
 
-# Build library
-Write-Info "Building library..."
+# Build library (includes native C/C++ compilation)
+Write-Info "Building library (including native code)..."
 try {
     .\gradlew.bat assembleRelease --quiet
     Write-Success "Library built successfully"
 } catch {
     Write-Error "Build failed!"
     Write-Host $_.Exception.Message
+    Write-Host ""
+    Write-Host "Fix the build errors before releasing"
+    Write-Host "To see detailed build output, run:"
+    Write-Host "  .\gradlew.bat assembleRelease"
     exit 1
 }
 
